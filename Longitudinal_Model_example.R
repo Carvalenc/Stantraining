@@ -4,7 +4,7 @@ library(ggplot2) #Opening libraries
 library(rstan)
 library(reshape2)
 library(dplyr)
-
+library(faraway)
 
 
 ###################################################
