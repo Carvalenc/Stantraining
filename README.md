@@ -13,4 +13,4 @@ This file was created by Carlos Valencia following the existing instructions for
 
 `library("rstan")` #observe startup messages
 
-`rstan_options(auto_write = TRUE) `# Save a section of the Stan program to the hard disk`
+`rstan_options(auto_write = TRUE) `# Save a section of the Stan program to the hard disk
