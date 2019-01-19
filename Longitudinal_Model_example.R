@@ -51,7 +51,43 @@ psiddat <- list(Nobs = nrow(psid),
 
 rstan_options(auto_write = TRUE)
 options(mc.cores = parallel::detectCores())
-rt <- stanc("longitudinal.stan")
-sm <- stan_model(stanc_ret = rt, verbose=FALSE)
+rt = stanc("longitudinal.stan")
+sm = stan_model(stanc_ret = rt, verbose=FALSE)
 set.seed(123)
 system.time(fit <- sampling(sm, data=psiddat))
+
+
+pname <- "sigmaeps"
+pname <- 'beta[2]'
+muc <- rstan::extract(fit, pars=pname,  permuted=FALSE, inc_warmup=FALSE)
+mdf <- melt(muc)
+ggplot(mdf,aes(x=iterations,y=value,color=chains)) + geom_line() + ylab(mdf$parameters[1])
+
+
+
+
+
+# === Ourput
+print(fit,par=c("beta","sigmaint","sigmaslope","sigmaeps"))
+
+
+
+postsig <- rstan::extract(fit, pars=c("sigmaint","sigmaslope","sigmaeps"))
+ref <- melt(postsig)
+colnames(ref)[2:3] <- c("logincome","parameter")
+ggplot(data=ref,aes(x=logincome))+geom_density()+facet_wrap(~parameter,scales="free")
+
+
+ref <- melt(rstan::extract(fit, pars="beta"))
+colnames(ref)[2:3] <- c("parameter","logincome")
+ref$parameter <- factor(colnames(x)[ref$parameter])
+ref$OR <- exp(ref$logincome)
+ggplot(ref, aes(x=OR))+
+  geom_density()+
+  geom_vline(xintercept=1)+
+  facet_wrap(~parameter,scales="free")
+
+
+sessionInfo()
+
+
