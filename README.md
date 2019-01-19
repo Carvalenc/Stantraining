@@ -3,7 +3,7 @@ Stan training
 
 This file was created by Carlos Valencia following the existing instructions for Rstan available on: https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started
 
-remove.packages("rstan") #Removing any previously existing packages 
+`remove.packages("rstan") #Removing any previously existing packages 
 
 if (file.exists(".RData")) file.remove(".Rdata")
 
@@ -13,4 +13,4 @@ pkgbuild::has_build_tools(debug = TRUE) #The C++ R Tools package should be check
 
 library("rstan") #observe startup messages
 
-rstan_options(auto_write = TRUE) # Save a section of the Stan program to the hard disk
+rstan_options(auto_write = TRUE) # Save a section of the Stan program to the hard disk`
