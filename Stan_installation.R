@@ -1,3 +1,5 @@
+##Note: Make sure R and RStudio are up to date
+
 ##Running linear mixed model in Stan
 
 #Removing any previously existing packages 
